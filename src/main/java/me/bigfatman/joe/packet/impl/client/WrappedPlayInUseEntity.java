@@ -7,11 +7,18 @@ import org.bukkit.entity.Entity;
 
 public class WrappedPlayInUseEntity extends WrappedPacket {
 
-    public PacketPlayInUseEntity.EnumEntityUseAction useEntityAction;
+    public Action action;
     public Entity entity;
 
     public WrappedPlayInUseEntity(Class<?> object) {
         super(PacketPlayInUseEntity.class);
+    }
+
+
+    public enum Action {
+        ATTACK,
+        INTERACT,
+        INTERACT_AT
     }
 
     @Override

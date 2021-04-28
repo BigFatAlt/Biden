@@ -17,6 +17,7 @@ me\bigfatman\joe\events\impl\PlayerListener.class
 me\bigfatman\joe\commands\api\CommandManager.class
 me\bigfatman\joe\mod\impl\ModListener$1.class
 me\bigfatman\joe\packet\api\PacketManager.class
+me\bigfatman\joe\packet\api\PacketManager$1.class
 me\bigfatman\joe\events\impl\PunishmentListener.class
 me\bigfatman\joe\packet\impl\IWrappedPacket.class
 me\bigfatman\joe\mod\impl\MessageListener.class
@@ -33,6 +34,7 @@ me\bigfatman\joe\check\api\Check.class
 me\bigfatman\joe\check\type\flying\PositionCheck.class
 me\bigfatman\joe\check\impl\packet\InvalidPitch.class
 me\bigfatman\joe\mod\ModManager.class
+me\bigfatman\joe\packet\impl\client\WrappedPlayInUseEntity$Action.class
 me\bigfatman\joe\check\api\CheckManager.class
 me\bigfatman\joe\packet\api\PacketDirection.class
 me\bigfatman\joe\Biden.class

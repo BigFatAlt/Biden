@@ -6,7 +6,6 @@ import me.bigfatman.joe.check.type.PacketCheck;
 import me.bigfatman.joe.data.PlayerData;
 import me.bigfatman.joe.packet.impl.client.WrappedPlayInFlyingPacket;
 import me.bigfatman.joe.packet.impl.client.WrappedPlayInUseEntity;
-import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 
 @CheckManifest(name = "KillAura A", type = Check.CheckType.COMBAT)
 public class KillAuraA extends PacketCheck {
@@ -23,8 +22,8 @@ public class KillAuraA extends PacketCheck {
         if (o instanceof WrappedPlayInUseEntity) {
             WrappedPlayInUseEntity useEntity = (WrappedPlayInUseEntity) o;
 
-            if (useEntity.useEntityAction.equals(PacketPlayInUseEntity.EnumEntityUseAction.ATTACK)) {
-                long postAura = lastFlying - System.currentTimeMillis();
+            if (useEntity.action.equals(WrappedPlayInUseEntity.Action.ATTACK)) {
+                long postAura = System.currentTimeMillis() - lastFlying;
 
                 if (postAura < 40L) {
                     if (vl++ > 3) {

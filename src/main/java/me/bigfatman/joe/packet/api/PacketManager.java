@@ -54,7 +54,17 @@ public class PacketManager {
             PacketPlayInUseEntity useEntity = (PacketPlayInUseEntity) packet.object;
             WrappedPlayInUseEntity playInUseEntity = new WrappedPlayInUseEntity(packet.object.getClass());
 
-            playInUseEntity.useEntityAction = useEntity.a();
+            switch (useEntity.a()) {
+                case ATTACK:
+                    playInUseEntity.action = WrappedPlayInUseEntity.Action.ATTACK;
+                    break;
+                case INTERACT:
+                    playInUseEntity.action = WrappedPlayInUseEntity.Action.INTERACT;
+                    break;
+                case INTERACT_AT:
+                    playInUseEntity.action = WrappedPlayInUseEntity.Action.INTERACT_AT;
+                    break;
+            }
 
             fireCheck(playInUseEntity);
         }

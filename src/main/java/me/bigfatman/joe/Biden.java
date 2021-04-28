@@ -1,6 +1,7 @@
 package me.bigfatman.joe;
 
 
+import me.bigfatman.joe.commands.api.CommandManager;
 import me.bigfatman.joe.data.PlayerDataManager;
 import me.bigfatman.joe.events.impl.PlayerListener;
 import me.bigfatman.joe.events.impl.PunishmentListener;
@@ -41,6 +42,8 @@ public enum Biden {
         this.bidenPlugin.getServer().getPluginManager().registerEvents(new PunishmentListener(), bidenPlugin);
         this.bidenPlugin.getServer().getPluginManager().registerEvents(new ModListener(modManager), bidenPlugin);
         this.bidenPlugin.getServer().getPluginManager().registerEvents(new MenuFunctionListener(), bidenPlugin);
+
+        this.bidenPlugin.getCommand("biden").setExecutor(new CommandManager());
 
         this.bidenConfig = new ConfigUtil(bidenPlugin, "config.yml");
         this.bidenConfig.saveDefaultConfig();

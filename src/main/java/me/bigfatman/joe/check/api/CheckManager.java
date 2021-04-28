@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CheckManager {
 
-    public List<PacketCheck> packetChecks = new ArrayList<>();
+    public List<Check<Object>> packetChecks = new ArrayList<>();
 
     public final PlayerData playerData;
 

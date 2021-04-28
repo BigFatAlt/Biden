@@ -4,3 +4,7 @@ description: Biden AntiCheat made by bigfatman for %Server%
 version: 0.0.1
 commands:
   biden:
+    description: "Biden AntiCheat main command."
+    aliases:
+      - AntiCheat
+      - ac

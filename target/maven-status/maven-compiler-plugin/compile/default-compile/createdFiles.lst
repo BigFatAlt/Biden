@@ -1,13 +1,19 @@
+me\bigfatman\joe\check\type\flying\RotationCheck.class
 me\bigfatman\joe\utils\MiscUtils.class
 me\bigfatman\joe\violation\ViolationManager.class
 me\bigfatman\joe\packet\api\PacketHandler.class
 me\bigfatman\joe\events\impl\PunishmentListener$1.class
+me\bigfatman\joe\packet\impl\client\WrappedPlayInArmAnimation.class
 me\bigfatman\joe\data\PlayerDataManager.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInFlyingPacket.class
 me\bigfatman\joe\check\type\PacketCheck.class
 me\bigfatman\joe\packet\api\PacketInjector.class
 me\bigfatman\joe\data\PlayerData.class
+me\bigfatman\joe\commands\impl\Alerts.class
+me\bigfatman\joe\commands\api\BaseCommand.class
+me\bigfatman\joe\check\type\arm\SwingCheck.class
 me\bigfatman\joe\events\impl\PlayerListener.class
+me\bigfatman\joe\commands\api\CommandManager.class
 me\bigfatman\joe\mod\impl\ModListener$1.class
 me\bigfatman\joe\packet\api\PacketManager.class
 me\bigfatman\joe\events\impl\PunishmentListener.class
@@ -22,6 +28,7 @@ me\bigfatman\joe\utils\ConfigUtil.class
 me\bigfatman\joe\events\api\PlayerBanEvent.class
 me\bigfatman\joe\packet\api\Packet.class
 me\bigfatman\joe\check\api\Check.class
+me\bigfatman\joe\check\type\flying\PositionCheck.class
 me\bigfatman\joe\check\impl\packet\InvalidPitch.class
 me\bigfatman\joe\mod\ModManager.class
 me\bigfatman\joe\check\api\CheckManager.class

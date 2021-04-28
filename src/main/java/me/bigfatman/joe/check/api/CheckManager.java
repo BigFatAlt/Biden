@@ -1,7 +1,7 @@
 package me.bigfatman.joe.check.api;
 
+import me.bigfatman.joe.check.impl.combat.killaura.KillAuraA;
 import me.bigfatman.joe.check.impl.packet.InvalidPitch;
-import me.bigfatman.joe.check.type.PacketCheck;
 import me.bigfatman.joe.data.PlayerData;
 
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ public class CheckManager {
     }
 
     public void registerPacket() {
+        packetChecks.add(new KillAuraA(playerData));
         packetChecks.add(new InvalidPitch(playerData));
     }
 }

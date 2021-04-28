@@ -50,7 +50,7 @@ public enum Biden {
     }
 
     public void onStop() {
-
+        this.packetInjector.packetThread.shutdown();
     }
 
 

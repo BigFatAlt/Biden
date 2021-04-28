@@ -6,9 +6,14 @@ import me.bigfatman.joe.data.PlayerData;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class PacketInjector {
+
+    public ExecutorService packetThread = Executors.newCachedThreadPool();
+
 
     public void injectPlayer(PlayerData data) {
         try {
@@ -18,7 +23,9 @@ public class PacketInjector {
             Channel channel = playerConnection.networkManager.channel;
             ChannelPipeline channelPipeline = channel.pipeline();
 
-            channelPipeline.addBefore("packet_handler", "biden_handler", new PacketHandler(data));
+            packetThread.execute(() -> {
+                channelPipeline.addBefore("packet_handler", "biden_handler", new PacketHandler(data));
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,10 +39,11 @@ public class PacketInjector {
                 Channel channel = playerConnection.networkManager.channel;
                 ChannelPipeline pipeline = channel.pipeline();
 
-
-                channel.eventLoop().execute(() -> {
-                    if (pipeline.get("biden_handler") != null)
-                        pipeline.remove("biden_handler");
+                packetThread.execute(() -> {
+                    channel.eventLoop().execute(() -> {
+                        if (pipeline.get("biden_handler") != null)
+                            pipeline.remove("biden_handler");
+                    });
                 });
             }
 

@@ -1,7 +1,6 @@
 package me.bigfatman.joe.packet.impl.client;
 
 import me.bigfatman.joe.packet.api.PacketDirection;
-import me.bigfatman.joe.packet.enums.UseEntityAction;
 import me.bigfatman.joe.packet.impl.WrappedPacket;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 import org.bukkit.entity.Entity;

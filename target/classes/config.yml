@@ -1,0 +1,13 @@
+alert:
+  message: "&b&l[AC] &3%name &7failed &3%check &7VL %vl"
+
+ban:
+  enabled: true
+  message:
+    - "&b&m-------------------------------------"
+    - " "
+    - "&b&lBiden &3[AntiCheat]"
+    - " "
+    - "&3Biden has removed a player from the server."
+    - " "
+    - "&b&m-------------------------------------"

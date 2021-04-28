@@ -1,0 +1,6 @@
+name: AntiCheat
+main: me.bigfatman.joe.BidenPlugin
+description: Biden AntiCheat made by bigfatman for %Server%
+version: 0.0.1
+commands:
+  biden:

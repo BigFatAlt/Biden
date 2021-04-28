@@ -28,7 +28,9 @@ public class PacketManager {
     public void handlePackets(Packet packet) {
         if (packet.object instanceof PacketPlayInArmAnimation) {
             WrappedPlayInArmAnimation armAnimation = new WrappedPlayInArmAnimation(packet.object.getClass());
+
             fireCheck(armAnimation);
+            wrappedPackets.add(armAnimation);
         }
 
         if (packet.object instanceof PacketPlayInFlying)  {
@@ -45,6 +47,8 @@ public class PacketManager {
             flyingPacket.yaw = flying.d();
             flyingPacket.pitch = flying.e();
 
+            data.locationData.handleLocation(flyingPacket);
+            data.interactData.handleFlying(flyingPacket);
             fireCheck(flyingPacket);
 
             wrappedPackets.add(flyingPacket);
@@ -66,7 +70,10 @@ public class PacketManager {
                     break;
             }
 
+
+            data.interactData.handleUseEntity(playInUseEntity);
             fireCheck(playInUseEntity);
+            wrappedPackets.add(playInUseEntity);
         }
 
 

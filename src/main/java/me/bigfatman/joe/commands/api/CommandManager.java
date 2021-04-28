@@ -19,25 +19,25 @@ public class CommandManager implements CommandExecutor {
 
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String str, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length > 0) {
-            for (int i = 0; i  < commands.size(); i++) {
-                BaseCommand baseCommand = commands.get(i);
-
-                if (!commandSender.hasPermission(baseCommand.permission())) {
-                    commandSender.sendMessage(Colour.translateColour("&cYou do not have enough permissions to execute this command."));
-                    return true;
-                }
-
+            for (int i = 0; i < commands.size(); i++) {
+                final BaseCommand baseCommand = commands.get(i);
                 if (args[0].equalsIgnoreCase(baseCommand.name())) {
-                    baseCommand.handleCommand(commandSender, args);
+                    if (!sender.hasPermission(baseCommand.permission())) {
+                        sender.sendMessage(Colour.translateColour("&cYou do not have enough permissions to execute this command."));
+                        return true;
+                    }
+                    baseCommand.handleCommand(sender, args);
                     return true;
                 }
-                return true;
             }
+        } else {
+            helpMessage(sender);
             return true;
-        } else helpMessage(commandSender);
-        return false;
+        }
+        helpMessage(sender);
+        return true;
     }
 
     public void helpMessage(CommandSender commandSender) {

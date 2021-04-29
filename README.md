@@ -11,4 +11,4 @@ I am still learing about anticheats and stuff like that so please do not bully m
 
 the forge mod is not made by me i found the on a open source project called forge mod handler so full credit goes to them.
 
-if you have any questions about the anticheat feel free to contact me on discord BigFatAlt#5880
+if you have any questions about the anticheat feel free to join my discord https://discord.gg/gfv3EpzfCn

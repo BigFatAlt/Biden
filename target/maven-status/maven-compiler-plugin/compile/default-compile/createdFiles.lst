@@ -13,6 +13,7 @@ me\bigfatman\joe\events\impl\PlayerListener.class
 me\bigfatman\joe\check\impl\packet\badpackets\BadPacketsA.class
 me\bigfatman\joe\commands\api\CommandManager.class
 me\bigfatman\joe\mod\impl\ModListener$1.class
+me\bigfatman\joe\packet\impl\client\WrappedPlayInBlockDig.class
 me\bigfatman\joe\packet\api\PacketManager.class
 me\bigfatman\joe\packet\api\PacketManager$1.class
 me\bigfatman\joe\packet\impl\IWrappedPacket.class
@@ -27,15 +28,19 @@ me\bigfatman\joe\mod\ModManager.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInUseEntity$Action.class
 me\bigfatman\joe\packet\api\PacketDirection.class
 me\bigfatman\joe\Biden.class
+me\bigfatman\joe\packet\impl\client\WrappedPlayInBlockDig$PlayerDigType.class
 me\bigfatman\joe\utils\Colour.class
+me\bigfatman\joe\utils\MathUtils.class
 me\bigfatman\joe\check\api\Check$CheckType.class
 me\bigfatman\joe\check\type\flying\RotationCheck.class
 me\bigfatman\joe\utils\MiscUtils.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInArmAnimation.class
 me\bigfatman\joe\data\impl\LocationData.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInFlyingPacket.class
+me\bigfatman\joe\check\impl\combat\autoclicker\AutoClickerA.class
 me\bigfatman\joe\data\PlayerData.class
 me\bigfatman\joe\check\impl\combat\aimassist\AimAssistA.class
+me\bigfatman\joe\data\impl\InteractData$1.class
 me\bigfatman\joe\data\impl\InteractData.class
 me\bigfatman\joe\events\impl\PunishmentListener.class
 me\bigfatman\joe\mod\impl\MessageListener.class

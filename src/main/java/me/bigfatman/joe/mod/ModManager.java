@@ -1,7 +1,6 @@
 package me.bigfatman.joe.mod;
 
 import me.bigfatman.joe.Biden;
-import me.bigfatman.joe.data.PlayerData;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

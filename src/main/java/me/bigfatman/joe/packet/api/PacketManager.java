@@ -3,9 +3,11 @@ package me.bigfatman.joe.packet.api;
 import me.bigfatman.joe.data.PlayerData;
 import me.bigfatman.joe.packet.impl.WrappedPacket;
 import me.bigfatman.joe.packet.impl.client.WrappedPlayInArmAnimation;
+import me.bigfatman.joe.packet.impl.client.WrappedPlayInBlockDig;
 import me.bigfatman.joe.packet.impl.client.WrappedPlayInFlyingPacket;
 import me.bigfatman.joe.packet.impl.client.WrappedPlayInUseEntity;
 import net.minecraft.server.v1_8_R3.PacketPlayInArmAnimation;
+import net.minecraft.server.v1_8_R3.PacketPlayInBlockDig;
 import net.minecraft.server.v1_8_R3.PacketPlayInFlying;
 import net.minecraft.server.v1_8_R3.PacketPlayInUseEntity;
 
@@ -76,9 +78,38 @@ public class PacketManager {
             wrappedPackets.add(playInUseEntity);
         }
 
+        if (packet.object instanceof PacketPlayInBlockDig) {
+            PacketPlayInBlockDig blockDig = (PacketPlayInBlockDig) packet.object;
+            WrappedPlayInBlockDig playInBlockDig = new WrappedPlayInBlockDig(packet.object.getClass());
 
+            switch (blockDig.c()) {
+                case DROP_ITEM:
+                    playInBlockDig.playerDigType = WrappedPlayInBlockDig.PlayerDigType.DROP_ITEM;
+                    break;
+                case DROP_ALL_ITEMS:
+                    playInBlockDig.playerDigType = WrappedPlayInBlockDig.PlayerDigType.DROP_ALL_ITEMS;
+                    break;
+                case ABORT_DESTROY_BLOCK:
+                    playInBlockDig.playerDigType = WrappedPlayInBlockDig.PlayerDigType.ABORT_DESTROY_BLOCK;
+                    break;
+                case STOP_DESTROY_BLOCK:
+                    playInBlockDig.playerDigType = WrappedPlayInBlockDig.PlayerDigType.STOP_DESTROY_BLOCK;
+                    break;
+                case START_DESTROY_BLOCK:
+                    playInBlockDig.playerDigType = WrappedPlayInBlockDig.PlayerDigType.START_DESTROY_BLOCK;
+                    break;
+                case RELEASE_USE_ITEM:
+                    playInBlockDig.playerDigType = WrappedPlayInBlockDig.PlayerDigType.RELEASE_USE_ITEM;
+                    break;
+            }
+
+            data.interactData.handleDigging(playInBlockDig);
+            fireCheck(playInBlockDig);
+            wrappedPackets.add(playInBlockDig);
+        }
         packets.add(packet);
     }
+
 
     public void fireCheck(Object object) {
         synchronized (object) {

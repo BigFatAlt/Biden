@@ -2,7 +2,6 @@ package me.bigfatman.joe.check.api;
 
 import me.bigfatman.joe.Biden;
 import me.bigfatman.joe.data.PlayerData;
-import me.bigfatman.joe.packet.api.Packet;
 import me.bigfatman.joe.utils.MiscUtils;
 
 public abstract class Check<T> {
@@ -15,7 +14,7 @@ public abstract class Check<T> {
 
     public final PlayerData data;
 
-    public float maxVl;
+    public float maxVl, vl;
 
     public Check(PlayerData data) {
         this.data = data;
@@ -36,6 +35,8 @@ public abstract class Check<T> {
     public abstract void handlePacket(T t);
 
     public void flag(String information) {
+        vl++;
+
         Biden.INSTANCE.violationManager.handleViolation(this, data);
     }
 

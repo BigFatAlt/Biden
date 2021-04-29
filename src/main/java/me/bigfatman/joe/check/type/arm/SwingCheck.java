@@ -6,6 +6,7 @@ import me.bigfatman.joe.packet.impl.client.WrappedPlayInArmAnimation;
 
 public abstract class SwingCheck extends Check<Object> {
 
+
     public SwingCheck(PlayerData data) {
         super(data);
     }

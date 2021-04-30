@@ -10,11 +10,15 @@ public class PlayerDataManager {
 
     public final Map<UUID, PlayerData> playerDataMap = new HashMap<>();
 
-    public PlayerData find(Player player) {
-        if (!playerDataMap.containsKey(player.getUniqueId())) {
-            this.playerDataMap.put(player.getUniqueId(), new PlayerData(player.getUniqueId()));
-        }
+    public void addPlayer(Player player) {
+        this.playerDataMap.put(player.getUniqueId(), new PlayerData(player.getUniqueId()));
+    }
 
+    public void removePlayer(Player player) {
+        this.playerDataMap.remove(player.getUniqueId());
+    }
+
+    public PlayerData find(Player player) {
         return this.playerDataMap.get(player.getUniqueId());
     }
 }

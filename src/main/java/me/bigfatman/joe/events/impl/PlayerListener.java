@@ -1,7 +1,7 @@
 package me.bigfatman.joe.events.impl;
 
 import me.bigfatman.joe.Biden;
-import me.bigfatman.joe.data.PlayerData;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -17,17 +17,18 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        PlayerData data = Biden.INSTANCE.dataManager.find(event.getPlayer());
+        Player player = event.getPlayer();
 
-        biden.packetInjector.injectPlayer(data);
+        biden.dataManager.addPlayer(event.getPlayer());
+        biden.packetInjector.injectPlayer(biden.dataManager.find(player));
     }
 
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        PlayerData data = Biden.INSTANCE.dataManager.find(event.getPlayer());
+        Player player = event.getPlayer();
 
-
-        biden.packetInjector.ejectPlayer(data);
+        biden.dataManager.removePlayer(event.getPlayer());
+        biden.packetInjector.ejectPlayer(biden.dataManager.find(player));
     }
 }

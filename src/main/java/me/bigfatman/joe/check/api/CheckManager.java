@@ -3,6 +3,7 @@ package me.bigfatman.joe.check.api;
 import me.bigfatman.joe.check.impl.combat.aimassist.AimAssistA;
 import me.bigfatman.joe.check.impl.combat.aimassist.AimAssistA1;
 import me.bigfatman.joe.check.impl.combat.aimassist.AimAssistB;
+import me.bigfatman.joe.check.impl.combat.autoclicker.AutoClickerA;
 import me.bigfatman.joe.check.impl.combat.killaura.KillAuraA;
 import me.bigfatman.joe.check.impl.packet.InvalidPitch;
 import me.bigfatman.joe.check.impl.packet.badpackets.BadPacketsA;
@@ -27,6 +28,8 @@ public class CheckManager {
         packetChecks.add(new AimAssistA(playerData));
         packetChecks.add(new AimAssistA1(playerData));
         packetChecks.add(new AimAssistB(playerData));
+
+        packetChecks.add(new AutoClickerA(playerData));
 
         packetChecks.add(new BadPacketsA(playerData));
 

@@ -1,441 +1,104 @@
 package me.bigfatman.joe.utils;
 
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
+import com.google.common.util.concurrent.AtomicDouble;
+import lombok.experimental.UtilityClass;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
 
+
+/*
+ * This util was taken from Nemesis by sim0n and Toon
+ * https://github.com/sim0n/Nemesis/blob/main/src/main/java/dev/sim0n/anticheat/util/MathUtil.java
+ */
+
+@UtilityClass
 public class MathUtils {
 
-    public static double offset(Vector from, Vector to) {
-        from.setY(0);
-        to.setY(0);
 
-        return to.subtract(from).length();
+    /**
+     * Calculates sqrt of all the values entries^2
+     * @param values The number values
+     * @return sqrt(values^2)
+     */
+    public double hypot(double... values) {
+        AtomicDouble squaredSum = new AtomicDouble(0D);
+
+        Arrays.stream(values).forEach(value -> squaredSum.getAndAdd(Math.pow(value, 2D)));
+
+        return Math.sqrt(squaredSum.get());
     }
 
-    public static boolean playerMoved(Location from, Location to) {
-        return playerMoved(from.toVector(), to.toVector());
+    /**
+     * Calculates the average (mean) of {@param values}
+     * @param values The number values
+     * @return The average (mean) of {@param values}
+     */
+    public double getAverage(Collection<? extends Number> values) {
+        return values.stream()
+                .mapToDouble(Number::doubleValue)
+                .average()
+                .orElse(0D);
     }
 
-    public static byte getByte(int num) {
-        if(num > Byte.MAX_VALUE || num < Byte.MIN_VALUE) {
-            throw new NumberFormatException("Integer " + num + " too large to cast to data format byte!"
-                    + " (max=" + Byte.MAX_VALUE + " min=" + Byte.MIN_VALUE + ")");
-        }
+    /**
+     * Calculates the standard deviation of {@param values}
+     * @param values The number values
+     * @return The standard deviation of {@param values}
+     */
+    public double getStandardDeviation(Collection<? extends Number> values) {
+        double average = getAverage(values);
 
-        return (byte) num;
+        AtomicDouble variance = new AtomicDouble(0D);
+
+        values.forEach(delay -> variance.getAndAdd(Math.pow(delay.doubleValue() - average, 2D)));
+
+        return Math.sqrt(variance.get() / values.size());
     }
 
-    public static short getShort(int num) {
-        if(num > Short.MAX_VALUE || num < Short.MIN_VALUE) {
-            throw new NumberFormatException("Integer " + num + " too large to cast to data format short!"
-                    + " (max=" + Short.MAX_VALUE + " min=" + Short.MIN_VALUE + ")");
-        }
-        return (short) num;
+    /**
+     * Calculates the kurtosis of {@param values}
+     * @param values The number values
+     * @return The kurtosis of {@param values}
+     */
+    public double getKurtosis(Collection<? extends Number> values) {
+        double n = values.size();
+
+        if (n < 3)
+            return Double.NaN;
+
+        double average = getAverage(values);
+        double stDev = getStandardDeviation(values);
+
+        AtomicDouble accum = new AtomicDouble(0D);
+
+        values.forEach(delay -> accum.getAndAdd(Math.pow(delay.doubleValue() - average, 4D)));
+
+        return n * (n + 1) / ((n - 1) * (n - 2) * (n - 3)) *
+                (accum.get() / Math.pow(stDev, 4D)) - 3 *
+                Math.pow(n - 1, 2D) / ((n - 2) * (n - 3));
     }
 
-    public static boolean approxEquals(double accuracy, double equalTo, double... equals) {
-        return Arrays.stream(equals).allMatch(equal -> MathUtils.getDelta(equalTo, equal) < accuracy);
+    /**
+     * Gets the cps of {@param values}
+     * @param values The number values
+     * @return The cps
+     */
+    public double getCps(Collection<? extends Number> values) {
+        // 1 second = 20 ticks
+        return 20 / getAverage(values);
     }
 
-    public static boolean approxEquals(double accuracy, int equalTo, int... equals) {
-        return Arrays.stream(equals).allMatch(equal -> MathUtils.getDelta(equalTo, equal) < accuracy);
-    }
-
-    public static boolean approxEquals(double accuracy, long equalTo, long... equals) {
-        return Arrays.stream(equals).allMatch(equal -> MathUtils.getDelta(equalTo, equal) < accuracy);
-    }
-
-
-    //Returns -1 if fails.
-    public static <T extends Number> T tryParse(String string) {
-        try {
-            return (T)(Number)Double.parseDouble(string);
-        } catch(NumberFormatException e) {
-
-        }
-        return (T)(Number)(-1);
-    }
-
-    //A lighter version of the Java hypotenuse function.
-    public static double hypot(double... value) {
-        double total = 0;
-
-        for (double val : value) {
-            total += (val * val);
-        }
-
-        return Math.sqrt(total);
-    }
-
-    public static float hypot(float... value) {
-        float total = 0;
-
-        for (float val : value) {
-            total += (val * val);
-        }
-
-        return (float) Math.sqrt(total);
-    }
-
-    public static double get3DDistance(Vector one, Vector two) {
-        return hypot(one.getX() - two.getX(), one.getY() - two.getY(), one.getZ() - two.getZ());
-    }
-
-    public static boolean playerMoved(Vector from, Vector to) {
-        return from.distance(to) > 0;
-    }
-
-    public static boolean playerLooked(Location from, Location to) {
-        return (from.getYaw() - to.getYaw() != 0) || (from.getPitch() - to.getPitch() != 0);
-    }
-    public static boolean elapsed(long time, long needed) {
-        return Math.abs(System.currentTimeMillis() - time) >= needed;
-    }
-
-    //Euclid's algorithim
-    public static long gcd(long a, long b)
-    {
-        while (b > 0)
-        {
-            long temp = b;
-            b = a % b; // % is remainder
-            a = temp;
-        }
-        return a;
-    }
-
-    //Euclid's algorithim
-    public static long gcd(long... input)
-    {
-        long result = input[0];
-        for(int i = 1; i < input.length; i++) result = gcd(result, input[i]);
-        return result;
-    }
-
-    // Returns the absolute value of n-mid*mid*mid
-    static double diff(double n,double mid)
-    {
-        if (n > (mid*mid*mid))
-            return (n-(mid*mid*mid));
+    /**
+     * Calculates the gcd of {@param a} and {@param b}
+     * @return The gcd
+     */
+    public double gcd(double a, double b) {
+        if (a < b)
+            return gcd(b, a);
+        else if (Math.abs(b) < 0.001) // base case
+            return a;
         else
-            return ((mid*mid*mid) - n);
-    }
-
-    // Returns cube root of a no n
-    public static double cbrt(double n)
-    {
-        // Set start and end for binary search
-        double start = 0, end = n;
-
-        // Set precision
-        double e = 0.0000001;
-
-        double mid = -1;
-        double error = 1000;
-
-        long ticks = 0;
-        while (error > e)
-        {
-            mid = (start + end)/2;
-            error = diff(n, mid);
-
-            // If error is less than e then mid is
-            // our answer so return mid
-
-            // If mid*mid*mid is greater than n set
-            // end = mid
-            if ((mid*mid*mid) > n)
-                end = mid;
-
-                // If mid*mid*mid is less than n set
-                // start = mid
-            else
-                start = mid;
-
-            if(error > e && ticks++ > 3E4) {
-                return -1;
-            }
-        }
-        return mid;
-    }
-
-    //A much lighter but very slightly less accurate Math.sqrt.
-    public static double sqrt(double number) {
-        if(number == 0) return 0;
-        double t;
-        double squareRoot = number / 2;
-
-        do {
-            t = squareRoot;
-            squareRoot = (t + (number / t)) / 2;
-        } while ((t - squareRoot) != 0);
-
-        return squareRoot;
-    }
-
-    public static Vector getDirection(double yaw, double pitch) {
-        Vector vector = new Vector();
-        vector.setY(-Math.sin(Math.toRadians(pitch)));
-        double xz = Math.cos(Math.toRadians(pitch));
-        vector.setX(-xz * Math.sin(Math.toRadians(yaw)));
-        vector.setZ(xz * Math.cos(Math.toRadians(yaw)));
-        return vector;
-    }
-
-    public static float sqrt(float number) {
-        if(number == 0) return 0;
-        float t;
-
-        float squareRoot = number / 2;
-
-        do {
-            t = squareRoot;
-            squareRoot = (t + (number / t)) / 2;
-        } while ((t - squareRoot) != 0);
-
-        return squareRoot;
-    }
-
-    public static float normalizeAngle(float yaw) {
-        return yaw % 360;
-    }
-
-    public static double normalizeAngle(double yaw) {
-        return yaw % 360;
-    }
-
-    public static float getAngleDelta(float one, float two) {
-        float delta = getDelta(one, two) % 360f;
-
-        if(delta > 180) delta = 360 - delta;
-        return delta;
-    }
-
-    //Euclid's algorithim
-    public static long lcm(long a, long b)
-    {
-        return a * (b / gcd(a, b));
-    }
-
-    //Euclid's algorithim
-    public static long lcm(long... input)
-    {
-        long result = input[0];
-        for(int i = 1; i < input.length; i++) result = lcm(result, input[i]);
-        return result;
-    }
-
-    public static float getDelta(float one, float two) {
-        return Math.abs(one - two);
-    }
-
-    public static double getDelta(double one, double two) {
-        return Math.abs(one - two);
-    }
-
-    public static long getDelta(long one, long two) {
-        return Math.abs(one - two);
-    }
-
-    public static long getDelta(int one, int two) {
-        return Math.abs(one - two);
-    }
-
-    public static long elapsed(long time) {
-        return Math.abs(System.currentTimeMillis() - time);
-    }
-
-    public static double getHorizontalDistance(Location from, Location to) {
-        double deltaX = to.getX() - from.getX(), deltaZ = to.getZ() - from.getZ();
-        return sqrt(deltaX * deltaX + deltaZ * deltaZ);
-    }
-
-    public static double stdev(Collection<Double> list) {
-        double sum = 0.0;
-        double mean;
-        double num = 0.0;
-        double numi;
-        double deno = 0.0;
-
-        for (double i : list) {
-            sum += i;
-        }
-        mean = sum / list.size();
-
-        for (double i : list) {
-            numi = Math.pow(i - mean, 2);
-            num += numi;
-        }
-
-        return sqrt(num / list.size());
-    }
-
-    public static int millisToTicks(long millis) {
-        return (int) Math.ceil(millis / 50D);
-    }
-
-    public static double getVerticalDistance(Location from, Location to) {
-        return Math.abs(from.getY() - to.getY());
-    }
-
-
-
-    public static double trim(int degree, double d) {
-        String format = "#.#";
-        for (int i = 1; i < degree; ++i) {
-            format = String.valueOf(format) + "#";
-        }
-        DecimalFormat twoDForm = new DecimalFormat(format);
-        return Double.parseDouble(twoDForm.format(d).replaceAll(",", "."));
-    }
-
-    public static float trimFloat(int degree, float d) {
-        String format = "#.#";
-        for (int i = 1; i < degree; ++i) {
-            format = String.valueOf(format) + "#";
-        }
-        DecimalFormat twoDForm = new DecimalFormat(format);
-        return Float.parseFloat(twoDForm.format(d).replaceAll(",", "."));
-    }
-
-    public static double getYawDifference(Location one, Location two) {
-        return Math.abs(one.getYaw() - two.getYaw());
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        if(Double.isNaN(value) || Double.isInfinite(value)) return value;
-
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
-
-
-
-    public static double round(double value, int places, RoundingMode mode) {
-        if (places < 0) {
-            throw new IllegalArgumentException();
-        }
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, mode);
-        return bd.doubleValue();
-    }
-
-    public static double round(double value) {
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(0, RoundingMode.UP);
-        return bd.doubleValue();
-    }
-
-    public static float round(float value, int places) {
-        if (places < 0) {
-            throw new IllegalArgumentException();
-        }
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.floatValue();
-    }
-
-    public static float round(float value, int places, RoundingMode mode) {
-        if (places < 0) {
-            throw new IllegalArgumentException();
-        }
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, mode);
-        return bd.floatValue();
-    }
-
-    public static float round(float value) {
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(0, RoundingMode.UP);
-        return bd.floatValue();
-    }
-
-    public static int floor(double var0) {
-        int var2 = (int) var0;
-        return var0 < var2 ? var2 - 1 : var2;
-    }
-
-    public static float yawTo180F(float flub) {
-        if ((flub %= 360.0f) >= 180.0f) {
-            flub -= 360.0f;
-        }
-        if (flub < -180.0f) {
-            flub += 360.0f;
-        }
-        return flub;
-    }
-
-    public static double yawTo180D(double dub) {
-        if ((dub %= 360.0) >= 180.0) {
-            dub -= 360.0;
-        }
-        if (dub < -180.0) {
-            dub += 360.0;
-        }
-        return dub;
-    }
-
-    public static double getDirection(Location from, Location to) {
-        if (from == null || to == null) {
-            return 0.0;
-        }
-        double difX = to.getX() - from.getX();
-        double difZ = to.getZ() - from.getZ();
-        return MathUtils.yawTo180F((float) (Math.atan2(difZ, difX) * 180.0 / 3.141592653589793) - 90.0f);
-    }
-
-    public static float[] getRotations(Location one, Location two) {
-        double diffX = two.getX() - one.getX();
-        double diffZ = two.getZ() - one.getZ();
-        double diffY = two.getY() + 2.0 - 0.4 - (one.getY() + 2.0);
-        double dist = sqrt(diffX * diffX + diffZ * diffZ);
-        float yaw = (float) (Math.atan2(diffZ, diffX) * 180.0 / 3.141592653589793) - 90.0f;
-        float pitch = (float) (-Math.atan2(diffY, dist) * 180.0 / 3.141592653589793);
-        return new float[]{yaw, pitch};
-    }
-
-    public static float[] getRotations(LivingEntity origin, LivingEntity point) {
-        Location two = point.getLocation(), one = origin.getLocation();
-        double diffX = two.getX() - one.getX();
-        double diffZ = two.getZ() - one.getZ();
-        double diffY = two.getY() + 2.0 - 0.4 - (one.getY() + 2.0);
-        double dist = sqrt(diffX * diffX + diffZ * diffZ);
-        float yaw = (float) (Math.atan2(diffZ, diffX) * 180.0 / 3.141592653589793) - 90.0f;
-        float pitch = (float) (-Math.atan2(diffY, dist) * 180.0 / 3.141592653589793);
-        return new float[]{yaw, pitch};
-    }
-
-    public static boolean isLookingTowardsEntity(Location from, Location to, LivingEntity entity) {
-        float[] rotFrom = getRotations(from, entity.getLocation()), rotTo = getRotations(to, entity.getLocation());
-        float deltaOne = getDelta(from.getYaw(), rotTo[0]), deltaTwo = getDelta(to.getYaw(), rotTo[1]);
-        float offsetFrom = getDelta(yawTo180F(from.getYaw()), yawTo180F(rotFrom[0])), offsetTo = getDelta(yawTo180F(to.getYaw()), yawTo180F(rotTo[0]));
-
-        return (deltaOne > deltaTwo && offsetTo > 15) || (MathUtils.getDelta(offsetFrom, offsetTo) < 1 && offsetTo < 10);
-    }
-
-    public static double[] getOffsetFromEntity(Player player, LivingEntity entity) {
-        double yawOffset = Math.abs(MathUtils.yawTo180F(player.getEyeLocation().getYaw()) - MathUtils.yawTo180F(MathUtils.getRotations(player.getLocation(), entity.getLocation())[0]));
-        double pitchOffset = Math.abs(Math.abs(player.getEyeLocation().getPitch()) - Math.abs(MathUtils.getRotations(player.getLocation(), entity.getLocation())[1]));
-        return new double[]{yawOffset, pitchOffset};
-    }
-
-    public static double[] getOffsetFromLocation(Location one, Location two) {
-        double yaw = MathUtils.getRotations(one, two)[0];
-        double pitch = MathUtils.getRotations(one, two)[1];
-        double yawOffset = Math.abs(yaw - MathUtils.yawTo180F(one.getYaw()));
-        double pitchOffset = Math.abs(pitch - one.getPitch());
-        return new double[]{yawOffset, pitchOffset};
+            return gcd(b, a - Math.floor(a / b) * b);
     }
 }

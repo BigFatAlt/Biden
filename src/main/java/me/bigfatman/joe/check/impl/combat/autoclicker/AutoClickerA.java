@@ -15,11 +15,18 @@ public class AutoClickerA extends SwingCheck {
         setSize(50);
     }
 
+    /*
+     * A normal player clicks under 20 so we check if the player is clicking more
+     * Butterfly clicking will false this and some legit players who can click faster
+     *
+     *  Update: changed it to 23 cps for safety.
+     */
+
     @Override
     public void swingCheck(Object o) {
         double cps = MathUtils.getCps(delays);
 
-        if (cps > 20) {
+        if (cps > 23) {
             flag("CPS+=" + cps);
         }
     }

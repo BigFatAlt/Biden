@@ -37,7 +37,7 @@ public class AimAssistB extends RotationCheck {
             if (deltaYaw > 0.1 && yawAcceleration < 0.995 && deltaPitch > 0.1 && pitchAcceleration < 0.995) {
                 if (PITest > 50.4) {
                     vl++;
-                   if (vl > 20) {
+                   if (vl > 50) {
                        flag("PI+=" + PITest);
                    }
                 } else if (vl > 0) vl--;

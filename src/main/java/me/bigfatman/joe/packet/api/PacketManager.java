@@ -31,6 +31,7 @@ public class PacketManager {
         if (packet.object instanceof PacketPlayInArmAnimation) {
             WrappedPlayInArmAnimation armAnimation = new WrappedPlayInArmAnimation(packet.object.getClass());
 
+            data.interactData.handleArmAnimation(armAnimation);
             fireCheck(armAnimation);
             wrappedPackets.add(armAnimation);
         }

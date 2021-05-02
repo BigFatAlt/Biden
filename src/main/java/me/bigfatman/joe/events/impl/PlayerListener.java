@@ -28,7 +28,7 @@ public class PlayerListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        biden.dataManager.removePlayer(event.getPlayer());
         biden.packetInjector.ejectPlayer(biden.dataManager.find(player));
+        biden.dataManager.removePlayer(event.getPlayer());
     }
 }

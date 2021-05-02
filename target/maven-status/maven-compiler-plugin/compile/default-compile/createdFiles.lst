@@ -5,6 +5,7 @@ me\bigfatman\joe\events\impl\PunishmentListener$1.class
 me\bigfatman\joe\data\PlayerDataManager.class
 me\bigfatman\joe\check\type\PacketCheck.class
 me\bigfatman\joe\packet\api\PacketInjector.class
+me\bigfatman\joe\check\impl\combat\autoclicker\AutoClickerB.class
 me\bigfatman\joe\commands\impl\Alerts.class
 me\bigfatman\joe\check\impl\combat\killaura\KillAuraA.class
 me\bigfatman\joe\commands\api\BaseCommand.class
@@ -44,10 +45,14 @@ me\bigfatman\joe\data\impl\InteractData$1.class
 me\bigfatman\joe\data\impl\InteractData.class
 me\bigfatman\joe\events\impl\PunishmentListener.class
 me\bigfatman\joe\mod\impl\MessageListener.class
+me\bigfatman\joe\check\impl\combat\autoclicker\AutoClickerC.class
+me\bigfatman\joe\check\impl\packet\badpackets\BadPacketsB.class
 me\bigfatman\joe\mod\ModData.class
 me\bigfatman\joe\check\api\CheckManifest.class
 me\bigfatman\joe\BidenPlugin.class
 me\bigfatman\joe\utils\ConfigUtil.class
 me\bigfatman\joe\events\api\PlayerBanEvent.class
 me\bigfatman\joe\packet\api\Packet.class
+me\bigfatman\joe\check\impl\combat\autoclicker\AutoClickerD.class
+me\bigfatman\joe\check\impl\combat\killaura\KillAuraB.class
 me\bigfatman\joe\check\api\CheckManager.class

@@ -6,12 +6,12 @@ import me.bigfatman.joe.check.type.PacketCheck;
 import me.bigfatman.joe.data.PlayerData;
 import me.bigfatman.joe.packet.impl.client.WrappedPlayInUseEntity;
 
-@CheckManifest(name = "KillAura A", type = Check.CheckType.COMBAT)
-public class KillAuraA extends PacketCheck {
+@CheckManifest(name = "KillAura B", type = Check.CheckType.COMBAT)
+public class KillAuraB extends PacketCheck {
 
     public int vl;
 
-    public KillAuraA(PlayerData data) {
+    public KillAuraB(PlayerData data) {
         super(data);
     }
 
@@ -21,15 +21,12 @@ public class KillAuraA extends PacketCheck {
             WrappedPlayInUseEntity useEntity = (WrappedPlayInUseEntity) o;
 
             if (useEntity.action.equals(WrappedPlayInUseEntity.Action.ATTACK)) {
-                long postAura = System.currentTimeMillis() - data.interactData.lastFlying;
-
-                if (postAura < 10L) {
-                    if (vl++ > 5) {
-                        flag("post <=" + postAura);
+                if (data.interactData.digging) {
+                    if (vl++ > 4) {
+                        flag();
                     }
                 } else if (vl > 0) vl--;
             }
         }
-
     }
 }

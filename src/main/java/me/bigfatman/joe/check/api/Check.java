@@ -34,7 +34,7 @@ public abstract class Check<T> {
 
     public abstract void handlePacket(T t);
 
-    public void flag(String information) {
+    public void flag(String... information) {
         vl++;
 
         Biden.INSTANCE.violationManager.handleViolation(this, data);

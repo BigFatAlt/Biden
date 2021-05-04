@@ -1,6 +1,7 @@
 me\bigfatman\joe\check\impl\combat\aimassist\AimAssistA1.class
 me\bigfatman\joe\violation\ViolationManager.class
 me\bigfatman\joe\packet\api\PacketHandler.class
+me\bigfatman\joe\check\impl\combat\aimassist\AimAssistC.class
 me\bigfatman\joe\events\impl\PunishmentListener$1.class
 me\bigfatman\joe\data\PlayerDataManager.class
 me\bigfatman\joe\check\type\PacketCheck.class
@@ -39,6 +40,7 @@ me\bigfatman\joe\packet\impl\client\WrappedPlayInArmAnimation.class
 me\bigfatman\joe\data\impl\LocationData.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInFlyingPacket.class
 me\bigfatman\joe\check\impl\combat\autoclicker\AutoClickerA.class
+me\bigfatman\joe\check\impl\combat\aimassist\AimAssistD.class
 me\bigfatman\joe\data\PlayerData.class
 me\bigfatman\joe\check\impl\combat\aimassist\AimAssistA.class
 me\bigfatman\joe\data\impl\InteractData$1.class
@@ -54,5 +56,4 @@ me\bigfatman\joe\utils\ConfigUtil.class
 me\bigfatman\joe\events\api\PlayerBanEvent.class
 me\bigfatman\joe\packet\api\Packet.class
 me\bigfatman\joe\check\impl\combat\autoclicker\AutoClickerD.class
-me\bigfatman\joe\check\impl\combat\killaura\KillAuraB.class
 me\bigfatman\joe\check\api\CheckManager.class

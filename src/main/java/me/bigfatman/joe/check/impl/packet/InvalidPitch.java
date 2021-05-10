@@ -17,7 +17,7 @@ public class InvalidPitch extends RotationCheck {
     public void rotationCheck(Object object) {
         WrappedPlayInFlyingPacket flyingPacket = (WrappedPlayInFlyingPacket) object;
 
-        if (Math.abs(flyingPacket.pitch) > 90.f) {
+        if (Math.abs(flyingPacket.pitch) > 90.f || Math.abs(flyingPacket.pitch) < -90.f) {
             flag("P+=" + Math.abs(flyingPacket.pitch));
         }
     }

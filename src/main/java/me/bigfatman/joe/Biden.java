@@ -5,9 +5,6 @@ import me.bigfatman.joe.commands.api.CommandManager;
 import me.bigfatman.joe.data.PlayerDataManager;
 import me.bigfatman.joe.events.impl.PlayerListener;
 import me.bigfatman.joe.events.impl.PunishmentListener;
-import me.bigfatman.joe.mod.ModManager;
-import me.bigfatman.joe.mod.impl.MessageListener;
-import me.bigfatman.joe.mod.impl.ModListener;
 import me.bigfatman.joe.packet.api.PacketInjector;
 import me.bigfatman.joe.utils.ConfigUtil;
 import me.bigfatman.joe.utils.gui.MenuFunctionListener;
@@ -19,7 +16,6 @@ public enum Biden {
 
     public BidenPlugin bidenPlugin;
 
-    public ModManager modManager;
     public ViolationManager violationManager;
     public PlayerDataManager dataManager;
 
@@ -32,15 +28,11 @@ public enum Biden {
 
         this.dataManager = new PlayerDataManager();
         this.violationManager = new ViolationManager();
-        this.modManager = new ModManager(this);
 
         this.packetInjector = new PacketInjector();
 
-        new MessageListener(modManager);
-
         this.bidenPlugin.getServer().getPluginManager().registerEvents(new PlayerListener(this), bidenPlugin);
         this.bidenPlugin.getServer().getPluginManager().registerEvents(new PunishmentListener(), bidenPlugin);
-        this.bidenPlugin.getServer().getPluginManager().registerEvents(new ModListener(modManager), bidenPlugin);
         this.bidenPlugin.getServer().getPluginManager().registerEvents(new MenuFunctionListener(), bidenPlugin);
 
         this.bidenPlugin.getCommand("biden").setExecutor(new CommandManager());

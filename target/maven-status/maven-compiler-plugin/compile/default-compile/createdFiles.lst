@@ -32,6 +32,7 @@ me\bigfatman\joe\utils\MathUtils.class
 me\bigfatman\joe\check\api\Check$CheckType.class
 me\bigfatman\joe\check\type\flying\RotationCheck.class
 me\bigfatman\joe\utils\MiscUtils.class
+me\bigfatman\joe\check\impl\combat\aimassist\AimAssistG.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInArmAnimation.class
 me\bigfatman\joe\data\impl\LocationData.class
 me\bigfatman\joe\packet\impl\client\WrappedPlayInFlyingPacket.class
@@ -49,3 +50,4 @@ me\bigfatman\joe\check\impl\combat\aimassist\AimAssistE.class
 me\bigfatman\joe\events\api\PlayerBanEvent.class
 me\bigfatman\joe\packet\api\Packet.class
 me\bigfatman\joe\check\api\CheckManager.class
+me\bigfatman\joe\check\impl\combat\aimassist\AimAssistF.class

@@ -23,6 +23,7 @@ C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\ut
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\utils\gui\paginate\AbstractPaginatedMenuBuilder.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\data\impl\LocationData.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\utils\gui\template\StaticItemTemplate.java
+C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\check\impl\combat\aimassist\AimAssistG.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\check\impl\combat\aimassist\AimAssistA.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\check\impl\combat\aimassist\AimAssistD.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\data\PlayerData.java
@@ -52,6 +53,7 @@ C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\ch
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\utils\gui\type\AbstractMenu.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\violation\ViolationManager.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\utils\gui\paginate\MultiSectionPaginatedMenuBuilder.java
+C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\check\impl\combat\aimassist\AimAssistF.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\utils\gui\mask\BinaryMask.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\packet\impl\IWrappedPacket.java
 C:\Users\kamer\OneDrive\Documents\GitHub\Biden\src\main\java\me\bigfatman\joe\utils\gui\template\ItemStackTemplate.java

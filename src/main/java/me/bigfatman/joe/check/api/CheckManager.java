@@ -30,6 +30,8 @@ public class CheckManager {
         packetChecks.add(new AimAssistC(playerData));
         packetChecks.add(new AimAssistD(playerData));
         packetChecks.add(new AimAssistE(playerData));
+        packetChecks.add(new AimAssistF(playerData));
+        packetChecks.add(new AimAssistG(playerData));
 
         packetChecks.add(new BadPacketsA(playerData));
         packetChecks.add(new BadPacketsB(playerData));

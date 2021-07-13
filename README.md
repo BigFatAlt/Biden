@@ -1,9 +1,9 @@
 # Biden
 
-Biden is a free open source anticheat that is made by be BigFatAlt.
+Biden is a free open source anticheat that is made by me BigFatAlt.
 I'm making this project to put my name out in the community.
 
-Some checks in here will look like other's in different AntiCheats but thats because why should i try remake basic checks ? This dose not mean im a skid in any means
+Some checks in here will look like other's in different AntiCheats but thats because why should i try remake basic checks ? This does not mean im a skid in any means
 
 The code in this anticheat is free to use and if you want to add to it feel free to do so
 
